@@ -9,7 +9,7 @@ export const checkDiff = (source: string, path: string, rules: readonly Rule[]):
   if (rule.checker !== "forbidden-call") return [];
   const pattern = rule.params["pattern"];
   if (typeof pattern !== "string" || !source.includes(pattern)) return [];
-  return [{ ruleId: rule.id, severity: rule.severity, message: `${rule.title}: found ${pattern}`, path, ...(lineOf(source, pattern) === undefined ? {} : { line: lineOf(source, pattern) }) }];
+  return [{ ruleId: rule.id, severity: rule.severity, message: `${rule.title}: found ${pattern}`, path, waived: false, ...(lineOf(source, pattern) === undefined ? {} : { line: lineOf(source, pattern) }) }];
 });
 
 export const checkIntent = (intent: Intent, rules: readonly Rule[]): Violation[] => {
