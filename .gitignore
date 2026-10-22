@@ -1,0 +1,16 @@
+# Local environment files (keep the shareable example file if one is added)
+.env
+.env.*
+!.env.example
+
+# Devpost learning context
+/devpost/learner-profile.md
+
+# Build products and Warden local state
+node_modules/
+dist/
+coverage/
+.warden/warden.db
+.warden/logs/
+.warden/reviewers/
+.warden/evidence/
