@@ -1,10 +1,10 @@
-# Warden
+# Coden
 
-Warden is local mission control for AI coding agents: it turns documented constraints into enforceable rules, records agent evidence, measures behavioral changes, and returns an explainable **SHIP**, **REVIEW**, or **BLOCK** verdict.
+Coden is a local proof of concept for reviewing AI-generated code changes. Paste a controller change and it checks one architectural boundary: controllers must not issue direct database queries.
 
 ## Current implementation
 
-The repository is implementing the P0 demo spine defined in `IDEA.md`, `SPEC.md`, and `TASKS.md`: Constitution Forge, Gatekeeper, Shadow Run, Flight Recorder, Earned Autonomy, Verdict, Mission Control, and reproducible benchmark fixtures.
+The current POC provides one complete flow: paste code → scan → receive a pass/block decision with evidence and a recommended correction. The wider product ideas in the repository documents are reference material for later iterations.
 
 ## Development
 
@@ -12,6 +12,7 @@ The repository is implementing the P0 demo spine defined in `IDEA.md`, `SPEC.md`
 pnpm install
 pnpm typecheck
 pnpm test
+pnpm --filter @coden/dashboard dev
 ```
 
 Warden does not send telemetry. Demo fixtures are explicitly labelled and are not production findings.
