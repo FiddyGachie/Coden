@@ -28,17 +28,21 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # Build all workspace packages the extension depends on first
+      # Build all workspace packages the extension depends on, in dependency order
       - name: Build workspace packages
         run: |
           pnpm --filter @warden/shared build
           pnpm --filter @warden/analyzers build
           pnpm --filter @warden/llm build
           pnpm --filter @warden/rules-engine build
+          pnpm --filter @warden/core build
 
-      # Build the dashboard into extension/media, then compile the extension host
-      - name: Build extension
-        run: pnpm --filter coden-vscode build
+      # Build the dashboard into extension/media, then compile the extension host only
+      - name: Build extension host
+        working-directory: apps/extension
+        run: |
+          pnpm --filter @coden/dashboard build
+          npx tsc -p tsconfig.json
 
       # Package into a .vsix (no-dependencies because node_modules are not bundled)
       - name: Package .vsix
