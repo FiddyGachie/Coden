@@ -2,5 +2,6 @@
   "buildCommand": "pnpm --filter @coden/dashboard build:vercel",
   "outputDirectory": "apps/dashboard/dist",
   "installCommand": "pnpm install --frozen-lockfile",
-  "framework": null
+  "framework": null,
+  "comment": "This file is used when Vercel root is the repo root. If root directory is apps/dashboard, apps/dashboard/vercel.json is used instead."
 }
