@@ -6,12 +6,16 @@
   "scripts": {
     "build": "pnpm -r build",
     "typecheck": "pnpm -r typecheck",
-    "lint": "pnpm -r lint",
+    "lint": "eslint apps packages",
     "test": "pnpm -r test",
     "bench:smoke": "pnpm --filter @warden/bench smoke"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/node": "^24.0.0",
-    "typescript": "^5.8.3"
+    "eslint": "^10.13.0",
+    "prettier": "^3.9.10",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.72.0"
   }
 }

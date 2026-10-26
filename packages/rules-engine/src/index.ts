@@ -1,3 +1,11 @@
+export * from "./doc-ingestion.js";
+export * from "./assertion-extraction.js";
+export * from "./conflict-detector.js";
+export * from "./checkers.js";
+export * from "./checkers-extended.js";
+export * from "./constitution-render.js";
+export * from "./compliance-score.js";
+
 import type { Intent, Rule, Verdict, Violation } from "@warden/shared";
 
 const lineOf = (text: string, match: string): number | undefined => {

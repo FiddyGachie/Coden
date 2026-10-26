@@ -1,0 +1,23 @@
+{
+  "name": "@warden/analyzers",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@warden/shared": "workspace:*",
+    "simple-git": "^4.0.2",
+    "ts-morph": "^24.0.0",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "fast-check": "^3.23.2",
+    "vitest": "^3.1.4"
+  }
+}
