@@ -10,9 +10,11 @@ import { RulesTable } from "./RulesTable.js";
 import { ComplianceWidget } from "./ComplianceWidget.js";
 import "./styles.css";
 
-// ── External links — update when the extension is published ──────────────────
-const VSCODE_MARKETPLACE_URL = "https://marketplace.visualstudio.com/items?itemName=coden.coden-vscode";
-const GITHUB_RELEASES_URL = "https://github.com/kephotho/Coden/releases/latest";
+// ── External links ────────────────────────────────────────────────────────────
+const VSCODE_MARKETPLACE_URL = "https://marketplace.visualstudio.com/items?itemName=FiddyGachie.coden-vscode";
+const GITHUB_RELEASES_URL = "https://github.com/FiddyGachie/Coden/releases/latest";
+// Direct link to the .vsix asset produced by the release workflow
+const VSIX_DOWNLOAD_URL = "https://github.com/FiddyGachie/Coden/releases/latest/download/coden.vsix";
 
 const passingExample = "import { ordersRepository } from '../repositories/orders.js';\n\nexport const createOrder = async (request) => {\n  return ordersRepository.create(request.body);\n};";
 const blockedExample = "export const createOrder = async (request) => {\n  return db.query('insert into orders values (...)');\n};";
@@ -53,10 +55,10 @@ const DownloadSection = (): ReactElement => (
         </a>
         <a
           className="cta-secondary"
-          href={GITHUB_RELEASES_URL}
+          href={VSIX_DOWNLOAD_URL}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Download .vsix from GitHub Releases"
+          aria-label="Download coden.vsix from GitHub Releases"
         >
           Download .vsix
         </a>

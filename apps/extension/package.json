@@ -1,19 +1,36 @@
 {
   "name": "coden-vscode",
   "displayName": "Coden",
+  "description": "Turns your project constitution into an explainable BLOCK / REVIEW / SHIP verdict on every AI-generated change.",
   "version": "0.1.0",
+  "publisher": "FiddyGachie",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/FiddyGachie/Coden.git" },
+  "categories": ["Linters", "Other"],
+  "keywords": ["ai", "code review", "compliance", "constitution", "vscode"],
   "main": "./dist/extension.js",
   "engines": { "vscode": "^1.95.0" },
   "activationEvents": ["onStartupFinished"],
   "contributes": {
     "commands": [
-      { "command": "warden.openMissionControl", "title": "Warden: Open Mission Control" },
-      { "command": "warden.showVerdict",         "title": "Warden: Show Verdict" },
-      { "command": "warden.restartCore",          "title": "Warden: Restart Core" }
+      { "command": "warden.openMissionControl", "title": "Coden: Open Mission Control" },
+      { "command": "warden.showVerdict",         "title": "Coden: Show Verdict" },
+      { "command": "warden.restartCore",          "title": "Coden: Restart Core" }
     ]
   },
-  "scripts": { "build": "pnpm --filter @warden/core build && pnpm --filter @coden/dashboard build && tsc -p tsconfig.json", "typecheck": "tsc --noEmit -p tsconfig.json", "lint": "tsc --noEmit -p tsconfig.json", "test": "vitest run" },
-  "devDependencies": { "@types/vscode": "^1.95.0", "typescript": "^5.8.3", "vitest": "^3.1.4" }
+  "scripts": {
+    "build": "pnpm --filter @warden/core build && pnpm --filter @coden/dashboard build && tsc -p tsconfig.json",
+    "package:vsix": "pnpm run build && vsce package --no-dependencies --out coden.vsix",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.95.0",
+    "@vscode/vsce": "^3.4.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.4"
+  }
 }

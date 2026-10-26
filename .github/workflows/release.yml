@@ -1,0 +1,64 @@
+name: Release .vsix
+
+# Triggers on any tag like v0.1.0, v1.2.3, etc.
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write   # needed to create the GitHub Release and upload assets
+
+jobs:
+  build-vsix:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.8.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Build all workspace packages the extension depends on first
+      - name: Build workspace packages
+        run: |
+          pnpm --filter @warden/shared build
+          pnpm --filter @warden/analyzers build
+          pnpm --filter @warden/llm build
+          pnpm --filter @warden/rules-engine build
+
+      # Build the dashboard into extension/media, then compile the extension host
+      - name: Build extension
+        run: pnpm --filter coden-vscode build
+
+      # Package into a .vsix (no-dependencies because node_modules are not bundled)
+      - name: Package .vsix
+        working-directory: apps/extension
+        run: pnpm exec vsce package --no-dependencies --out coden.vsix
+
+      # Create the GitHub Release and upload the .vsix as an asset
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: apps/extension/coden.vsix
+          generate_release_notes: true
+          name: "Coden ${{ github.ref_name }}"
+          body: |
+            ## Install
+
+            **Option A — VS Code Marketplace** *(once published)*
+            Search for "Coden" in the Extensions panel or visit the Marketplace.
+
+            **Option B — Manual .vsix install**
+            1. Download `coden.vsix` from the assets below.
+            2. In VS Code open the Command Palette (`Ctrl+Shift+P`).
+            3. Run **Extensions: Install from VSIX…** and select the file.

@@ -1,0 +1,16 @@
+# Source and test files — not needed in the packaged extension
+src/
+**/*.test.ts
+**/*.test.js
+**/*.test.js.map
+
+# Build artifacts that don't belong in the extension
+node_modules/
+.vscode-test/
+
+# Repo tooling
+tsconfig.json
+.eslintrc*
+.prettierrc*
+
+# Keep: dist/, media/ — the compiled extension and webview bundle
